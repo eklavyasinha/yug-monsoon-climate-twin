@@ -1,0 +1,249 @@
+@import "tailwindcss";
+
+@theme {
+  --color-atlas-bg: #08101d;
+  --color-atlas-obsidian: #060b14;
+  --color-atlas-surface-1: #0e1829;
+  --color-atlas-surface-2: #142238;
+  --color-atlas-border: #1e2f4a;
+  --color-atlas-border-strong: #2c4366;
+  --color-atlas-text: #e6edf7;
+  --color-atlas-muted: #93a4bd;
+  --color-atlas-cyan: #5cc8e0;
+  --color-atlas-ice: #bfe6f2;
+  --color-atlas-amber: #f2a93b;
+  --color-atlas-danger: #e5646b;
+  --color-atlas-success: #5fc9a0;
+
+  --font-display: "Fraunces", Georgia, serif;
+  --font-sans: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+}
+
+@layer base {
+  html {
+    background-color: #060b14;
+    color: var(--color-atlas-text);
+    font-family: var(--font-sans);
+    scroll-behavior: smooth;
+    color-scheme: dark;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background-color: #060b14;
+    color: var(--color-atlas-text);
+    letter-spacing: 0.004em;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+
+  code,
+  pre,
+  kbd {
+    font-family: var(--font-mono);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-atlas-cyan);
+    outline-offset: 2px;
+  }
+}
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ============================================================================
+ * Atmospheric Workstation Surface Architecture
+ * Flat obsidian & calibrated midnight planes separated by 1px hairline rules.
+ * Zero SaaS glowing cards, zero glassmorphism bloat.
+ * ============================================================================ */
+
+.workstation-canvas {
+  background-color: #060b14;
+  background-image: radial-gradient(
+    90% 520px at 50% 0%,
+    rgba(20, 42, 72, 0.34) 0%,
+    rgba(6, 11, 20, 0) 78%
+  );
+}
+
+.hero-cartographic-field {
+  position: relative;
+  background-color: #060b14;
+  background-image:
+    linear-gradient(to right, rgba(92, 200, 224, 0.045) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(92, 200, 224, 0.045) 1px, transparent 1px),
+    radial-gradient(
+      62% 72% at 72% 46%,
+      rgba(22, 54, 88, 0.42) 0%,
+      rgba(8, 16, 29, 0) 76%
+    );
+  background-size: 64px 64px, 64px 64px, 100% 100%;
+}
+
+/* Hairline architectural plane — sharp 2px instrument geometry */
+.instrument-plane {
+  background-color: #08101d;
+  border: 1px solid #1e2f4a;
+}
+
+.instrument-well {
+  background-color: #060b14;
+  border: 1px solid #1a2942;
+}
+
+.instrument-map-frame {
+  background-color: #050a12;
+  border: 1px solid #263c5e;
+}
+
+/* Calibrated range scrubber with precision track */
+.atlas-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 4px;
+  border-radius: 1px;
+  background: #1a2942;
+  border: none;
+}
+
+.atlas-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 14px;
+  height: 18px;
+  border-radius: 2px;
+  background: #5cc8e0;
+  border: 1px solid #060b14;
+  cursor: pointer;
+  transition: transform 140ms cubic-bezier(0.16, 1, 0.3, 1), background-color 140ms ease;
+}
+
+.atlas-slider::-webkit-slider-thumb:hover {
+  background: #bfe6f2;
+  transform: scaleY(1.1);
+}
+
+.atlas-slider::-moz-range-thumb {
+  width: 14px;
+  height: 18px;
+  border-radius: 2px;
+  background: #5cc8e0;
+  border: 1px solid #060b14;
+  cursor: pointer;
+  transition: transform 140ms cubic-bezier(0.16, 1, 0.3, 1), background-color 140ms ease;
+}
+
+.atlas-slider::-moz-range-thumb:hover {
+  background: #bfe6f2;
+  transform: scaleY(1.1);
+}
+
+/* ============================================================================
+ * Noticeable, Crisp Compositor Motion (<= 280ms, transform & opacity only)
+ * ============================================================================ */
+
+@keyframes atlas-view-enter {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 6px, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.atlas-page-enter {
+  animation: atlas-view-enter 240ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes atlas-field-transition {
+  0% {
+    opacity: 0.72;
+    transform: translate3d(0, 2px, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.atlas-data-transition {
+  animation: atlas-field-transition 210ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes atlas-shimmer-sweep {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(240%);
+  }
+}
+
+.atlas-loading-bar {
+  position: relative;
+  height: 2px;
+  width: 100%;
+  overflow: hidden;
+  background-color: #142238;
+}
+
+.atlas-loading-bar::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  width: 42%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(92, 200, 224, 0.85) 50%,
+    transparent 100%
+  );
+  animation: atlas-shimmer-sweep 1.35s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+@keyframes atlas-progress-pulse {
+  0%,
+  100% {
+    opacity: 0.65;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.atlas-live-pulse {
+  animation: atlas-progress-pulse 1.8s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .atlas-page-enter,
+  .atlas-data-transition,
+  .atlas-loading-bar::after,
+  .atlas-live-pulse {
+    animation: none !important;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}

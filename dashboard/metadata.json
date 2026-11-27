@@ -1,0 +1,6 @@
+{
+  "name": "Multiverse of Monsoon — India's Climate Digital Twin",
+  "description": "Scientific atlas and contract-checked climate digital twin frontend for exploring 1° Indian monsoon atmospheric rollouts and counterfactual perturbations.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
